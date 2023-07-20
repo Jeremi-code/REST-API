@@ -76,21 +76,19 @@ async function getProduct(req,res,id){
 }
 async function deleteProduct(req,res,id){
     try{
-    const product= Product.findByID(id)
-    if(!product){
-        res.writeHead(200,{'Content-Type':'application/json'})
-        res.end(JSON.stringify({Message:'Message not found '}))
+        const product= await Product.findByID(id)
+        if(!product){
+            res.writeHead(404,{'Content-Type':'application/json'})
+            res.end(JSON.stringify({Message:'Product not found '}))
+        }
+        else{
+            await Product.deleteProd(id)
+            res.writeHead(200,{'Content-Type':'application/json'})
+            res.end(JSON.stringify({Message:`product ${id} has been removed `}))
+        }
     }
-    else{
-        
-
-        await Product.deleteProd(id)
-        res.writeHead(200,{'Content-Type':'application/json'})
-        res.end(JSON.stringify({Message:`product ${product} has been removed `}))
-    }
-}
     catch(error){
-
+        console.log(error)
     }
 }
 module.exports={getProducts,getProduct,createProduct,updateProduct,deleteProduct}
