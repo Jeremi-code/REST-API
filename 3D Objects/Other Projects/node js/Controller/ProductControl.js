@@ -1,5 +1,4 @@
 const Product = require('../Model/productModel')
-const products=require('../Data/products.json')
 const{getPostData}=require('../util')
 
 async function getProducts(req,res){
@@ -26,10 +25,8 @@ async function getProduct(req,res,id){
         }
     } 
         catch (error) {
-
-
+            console.log(error)
         }
-        console.log(error)
         
     }
     async function createProduct(req,res){
@@ -43,7 +40,7 @@ async function getProduct(req,res,id){
             }
             const newProduct=await Product.create(product)
             res.writeHead(201,{'Content-Type':'application/json'})
-            res.end(JSON.stringify({Message:'message not found'}))
+            res.end(JSON.stringify(newProduct))
      
      
         }
