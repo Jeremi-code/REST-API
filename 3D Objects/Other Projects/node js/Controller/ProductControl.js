@@ -93,4 +93,4 @@ async function deleteProduct(req,res,id){
 
     }
 }
-module.exports={getProducts,getProduct,createProduct,updateProduct}
+module.exports={getProducts,getProduct,createProduct,updateProduct,deleteProduct}
