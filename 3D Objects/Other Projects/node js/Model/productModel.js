@@ -1,4 +1,4 @@
-const products= require('../Data/products')
+let products= require('../Data/products')
 const {v4:uuidv4}=require('uuid')
 const{writeDataToFile}=require('../util.js')
 function findAll(){
@@ -7,9 +7,9 @@ function findAll(){
     }
 )}
 function findByID(id){
-    return new Promise((res,rej)=>{
+    return new Promise((resolve,reject)=>{
         const product=products.find((p)=> p.id===id)
-        res(product)
+        resolve(product)
         
     })
 }
@@ -34,9 +34,9 @@ function update(id,product){
 }
 function deleteProd(index){
     return new Promise((resolve,reject)=>{
-        const delIndex=products.findIndex((p)=>p.id===index)
-        resolve(products.remove(delIndex))
-        
+        products = products.filter((p)=> p.index!==index)
+        writeDataToFile('./data/products.json',products)
+        resolve()        
     })
 
 }
